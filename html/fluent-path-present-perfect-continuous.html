@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fluent Path ESL Corner — Present Perfect Continuous</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A2545;
+  --ink-soft:#40567A;
+  --blue:#2B7BF3;
+  --blue-deep:#1246B8;
+  --sky:#45C2F7;
+  --wash:#EFF5FF;
+  --wash-2:#E2EEFE;
+  --line:#CFE2FB;
+  --surface:#FFFFFF;
+  --page:#F6F9FE;
+  --amber:#F0A33A;
+  --good:#12855A;
+  --good-bg:#E4F6EE;
+  --bad:#C0334A;
+  --bad-bg:#FCE9EC;
+  --shadow:0 10px 30px rgba(18,70,184,.10);
+  --r-lg:22px;
+  --r-md:14px;
+  --r-sm:9px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--page);
+  color:var(--ink);
+  font-family:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:17px;
+  line-height:1.65;
+}
+h1,h2,h3,h4,.brand-name,.tab,.btn,.stat-num{font-family:"Outfit","Segoe UI",system-ui,sans-serif}
+h1{font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.02em;margin:0 0 .5rem}
+h2{font-size:clamp(1.35rem,2.8vw,1.8rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 .6rem}
+h3{font-size:1.15rem;margin:0 0 .45rem;letter-spacing:-.005em}
+p{margin:0 0 1rem;max-width:72ch}
+a{color:var(--blue-deep)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0px);
+}
+.topbar-inner{max-width:1120px;margin:0 auto;padding:.7rem 1rem;display:flex;align-items:center;gap:.85rem;flex-wrap:wrap}
+.logo-box{
+  width:58px;height:58px;flex:0 0 58px;border-radius:16px;
+  background:linear-gradient(160deg,#FFFFFF,#EAF3FF);
+  border:1px solid var(--line);
+  display:grid;place-items:center;overflow:hidden;
+}
+.logo-box img{width:100%;height:100%;object-fit:contain;display:block}
+.brand-name{font-size:1.18rem;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.brand-sub{font-size:.82rem;color:var(--ink-soft);line-height:1.2}
+.progress-wrap{margin-left:auto;min-width:210px;flex:1 1 210px;max-width:320px}
+.progress-top{display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink-soft);margin-bottom:.25rem}
+.progress-track{height:10px;border-radius:99px;background:var(--wash-2);overflow:hidden}
+.progress-fill{height:100%;width:12.5%;border-radius:99px;background:linear-gradient(90deg,var(--sky),var(--blue));transition:width .35s ease}
+
+/* ---------- tabs ---------- */
+.tabrail{position:sticky;top:0;z-index:30;background:var(--page);border-bottom:1px solid var(--line)}
+.tabrail-inner{max-width:1120px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  font-size:.92rem;font-weight:500;padding:.5rem .85rem;border-radius:99px;cursor:pointer;
+  display:flex;align-items:center;gap:.35rem;white-space:nowrap;
+}
+.tab:hover{border-color:var(--blue);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;box-shadow:0 4px 14px rgba(18,70,184,.28)}
+.tab .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);display:none}
+.tab.done .dot{display:inline-block}
+.tab[aria-selected="true"] .dot{background:#FFD79A}
+
+/* ---------- layout ---------- */
+main{max-width:1120px;margin:0 auto;padding:1.5rem 1rem 2rem}
+.panel[hidden]{display:none}
+.lede{font-size:1.06rem;color:var(--ink-soft);max-width:66ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.35rem 1.35rem;box-shadow:var(--shadow);margin:0 0 1.15rem}
+.card.flat{box-shadow:none}
+.card-tight{padding:1rem 1.1rem}
+.grid{display:grid;gap:1rem}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
+.section-head{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin-bottom:1rem}
+.section-head .count{font-size:.85rem;color:var(--ink-soft)}
+
+/* hero */
+.hero{
+  background:linear-gradient(140deg,#123E8F 0%,#1D6BE3 48%,#3FB8F0 100%);
+  color:#fff;border-radius:26px;padding:1.9rem 1.5rem;margin-bottom:1.2rem;position:relative;overflow:hidden;
+}
+.hero h1{color:#fff}
+.hero p{color:#E4F0FF;max-width:60ch}
+.hero .star{font-size:.85rem;letter-spacing:.02em;color:#BFE0FF;margin-bottom:.5rem}
+.timeline-hero{margin-top:1.3rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:1rem 1.1rem}
+.tl-line{position:relative;height:40px;margin-top:.4rem}
+.tl-line::before{content:"";position:absolute;left:0;right:0;top:19px;height:3px;border-radius:2px;background:rgba(255,255,255,.45)}
+.tl-dot{position:absolute;top:9px;left:0;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.22);animation:travel 2.4s cubic-bezier(.4,0,.2,1) .4s both}
+@keyframes travel{from{left:0}to{left:calc(100% - 22px)}}
+.tl-ends{display:flex;justify-content:space-between;font-size:.85rem;color:#DDEBFF}
+@media (prefers-reduced-motion:reduce){.tl-dot{animation:none;left:calc(100% - 22px)}*{transition:none!important}}
+
+/* objective list */
+.obj{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.obj li{display:flex;gap:.6rem;align-items:flex-start;background:var(--wash);border-radius:var(--r-md);padding:.6rem .8rem}
+.obj .tick{color:var(--good);font-weight:700}
+
+/* warm-up people cards */
+.people{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.person{border:1px solid var(--line);border-radius:var(--r-md);padding:.85rem;background:linear-gradient(180deg,#fff,#F8FBFF)}
+.person .emoji{font-size:1.6rem;line-height:1}
+.person .who{font-weight:600;margin:.35rem 0 .1rem}
+.person .what{font-size:.94rem;color:var(--ink-soft)}
+.note{display:flex;gap:.6rem;align-items:flex-start;background:var(--wash-2);border:1px dashed var(--blue);border-radius:var(--r-md);padding:.75rem .9rem;color:var(--ink);font-size:.95rem}
+
+/* formula */
+.formula{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;justify-content:center;padding:1.1rem .8rem;background:var(--wash);border-radius:var(--r-md);border:1px solid var(--line)}
+.chip{font-family:"Outfit",sans-serif;font-weight:600;padding:.5rem .9rem;border-radius:12px;font-size:1.05rem}
+.chip.subj{background:#E7EEFB;color:var(--blue-deep);border:1px solid #C3D6F6}
+.chip.aux{background:#D8EEFE;color:#0B5A93;border:1px solid #A9D9F8}
+.chip.been{background:#DFF3E9;color:var(--good);border:1px solid #B2E0CB}
+.chip.ing{background:#FDEEDA;color:#9A5A11;border:1px solid #F3D3A4}
+.plus{font-weight:700;color:var(--ink-soft)}
+.ex-list{list-style:none;padding:0;margin:.9rem 0 0;display:grid;gap:.45rem}
+.ex-list li{padding:.55rem .8rem;border-left:4px solid var(--sky);background:#F7FBFF;border-radius:0 10px 10px 0}
+.ex-list b{color:var(--blue-deep)}
+.pronoun-split{display:grid;gap:.6rem;margin-top:1rem}
+@media(min-width:620px){.pronoun-split{grid-template-columns:1fr 1fr}}
+.pron{padding:.7rem .9rem;border-radius:var(--r-md);border:1px solid var(--line);background:#fff}
+.pron b{font-size:1.1rem;color:var(--blue-deep)}
+
+/* timeline strip */
+.strip{background:#F7FBFF;border:1px solid var(--line);border-radius:var(--r-md);padding:.9rem 1rem;margin:.9rem 0}
+.strip .bar{display:flex;align-items:center;gap:.5rem;font-size:1.25rem;letter-spacing:.12em}
+.strip .labels{display:flex;justify-content:space-between;font-size:.82rem;color:var(--ink-soft);margin-top:.25rem}
+
+/* for vs since */
+.fs{display:grid;gap:.9rem}
+@media(min-width:680px){.fs{grid-template-columns:1fr 1fr}}
+.fs-card{border-radius:var(--r-md);padding:1rem;border:1px solid var(--line)}
+.fs-for{background:linear-gradient(180deg,#EAF3FF,#FFFFFF)}
+.fs-since{background:linear-gradient(180deg,#E6F7FF,#FFFFFF)}
+.fs-card .q{font-weight:600;color:var(--blue-deep);margin:.15rem 0 .5rem}
+.fs-card ul{margin:.3rem 0 0;padding-left:1.1rem}
+.fs-card li{margin:.15rem 0}
+.mini-tl{margin-top:.8rem;font-size:.9rem;color:var(--ink-soft);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:.55rem .7rem}
+
+/* result chain */
+.chain{display:flex;flex-direction:column;gap:.35rem;align-items:center;text-align:center;background:#F7FBFF;border:1px solid var(--line);border-radius:var(--r-md);padding:1rem}
+.chain .step{font-size:1.02rem}
+.chain .arrow{color:var(--blue);font-size:1.1rem;line-height:1}
+
+/* time expression cards */
+.te{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+.te span{display:flex;flex-direction:column;gap:.15rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;font-weight:600}
+.te span i{font-style:normal;font-size:1.3rem}
+
+/* fix-it */
+.fix{display:grid;gap:.6rem}
+.fix-row{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.fix-row .wrong{background:var(--bad-bg);color:var(--bad);padding:.55rem .85rem}
+.fix-row .right{background:var(--good-bg);color:var(--good);padding:.55rem .85rem}
+.fix-row s{text-decoration-color:var(--bad)}
+
+/* quizzes */
+.q-item{border:1px solid var(--line);border-radius:var(--r-md);padding:1rem 1.05rem;background:#fff;margin-bottom:.85rem}
+.q-item.answered{border-color:#B9D4F7}
+.q-head{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.55rem}
+.q-num{font-family:"Outfit",sans-serif;font-weight:700;color:#fff;background:var(--blue);min-width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-size:.9rem;flex:0 0 auto}
+.q-text{font-weight:500}
+.q-kind{font-size:.78rem;color:var(--ink-soft);margin-left:auto;background:var(--wash);padding:.15rem .5rem;border-radius:99px;white-space:nowrap}
+.opts{display:grid;gap:.45rem;margin-top:.5rem}
+.opt{text-align:left;font:inherit;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .8rem;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--blue);background:var(--wash)}
+.opt:disabled{cursor:default;opacity:.95}
+.opt.is-correct{border-color:var(--good);background:var(--good-bg);color:var(--good);font-weight:600}
+.opt.is-wrong{border-color:var(--bad);background:var(--bad-bg);color:var(--bad);font-weight:600}
+.opt .mark{font-weight:700;margin-right:.4rem}
+.textrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.textrow input{font:inherit;padding:.5rem .7rem;border:1px solid var(--line);border-radius:10px;min-width:180px;flex:1 1 180px;background:#fff;color:var(--ink)}
+.fb{margin-top:.6rem;border-radius:10px;padding:.65rem .85rem;font-size:.95rem}
+.fb.ok{background:var(--good-bg);border:1px solid #B2E0CB;color:#0C5F42}
+.fb.no{background:var(--bad-bg);border:1px solid #F0C2CB;color:#8A2438}
+.fb .line{display:block}
+.fb b{font-weight:600}
+.scorebox{background:linear-gradient(140deg,#143F92,#2B7BF3);color:#fff;border-radius:var(--r-lg);padding:1.2rem 1.3rem;display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+.scorebox .big{font-family:"Outfit",sans-serif;font-size:2.4rem;font-weight:700;line-height:1}
+.scorebox .msg{color:#E3EEFF;flex:1 1 220px}
+
+/* buttons */
+.btn{font:inherit;font-weight:600;border-radius:12px;padding:.6rem 1.05rem;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary{background:var(--blue-deep);color:#fff}
+.btn-primary:hover{background:#0E3A9A}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--blue);background:var(--wash)}
+.btn-soft{background:var(--wash-2);color:var(--blue-deep)}
+.btnrow{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+
+/* reading */
+.passage{background:#FFFDF8;border:1px solid #EADFC6;border-radius:var(--r-lg);padding:1.3rem 1.4rem;box-shadow:var(--shadow)}
+.passage p{max-width:64ch;line-height:1.8}
+.passage .ppc{background:#E9F3FF;border-bottom:2px solid var(--sky);border-radius:3px;padding:0 2px}
+.passage .mark-time{background:#FDF0DC;border-bottom:2px solid var(--amber);border-radius:3px;padding:0 2px}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:var(--ink-soft);margin-top:.8rem}
+.legend i{font-style:normal;padding:0 4px;border-radius:3px}
+
+/* game */
+.game-stage{background:linear-gradient(160deg,#0E2D63,#1B5BC4);border-radius:26px;padding:1.3rem;color:#fff}
+.game-top{display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:.9rem}
+.game-title{font-family:"Outfit",sans-serif;font-weight:700;font-size:1.25rem}
+.game-meta{display:flex;gap:.6rem;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:.3rem .7rem;border-radius:99px;font-size:.9rem}
+.detective-line{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#CFE3FF;margin-bottom:.7rem}
+.detective-line .rule{flex:1;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.15),rgba(255,255,255,.7))}
+.sentence-card{background:#fff;color:var(--ink);border-radius:18px;padding:1.2rem;font-size:1.15rem;line-height:2.4;min-height:96px}
+.slot{
+  display:inline-block;min-width:112px;padding:.3rem .55rem;margin:0 .15rem;border-radius:10px;
+  border:2px dashed var(--blue);background:var(--wash);text-align:center;font-weight:600;color:var(--blue-deep);
+  vertical-align:middle;cursor:pointer;
+}
+.slot.over{background:#D6EAFF;border-color:var(--blue-deep);transform:scale(1.06);box-shadow:0 0 0 4px rgba(43,123,243,.18)}
+.slot.filled{border-style:solid;background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.slot.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.bank{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.gcard{
+  background:#fff;color:var(--blue-deep);border:1px solid #BFD9FA;border-radius:12px;padding:.5rem .85rem;
+  font-family:"Outfit",sans-serif;font-weight:600;cursor:grab;touch-action:none;user-select:none;
+  box-shadow:0 3px 0 #C9DEFA;
+}
+.gcard.selected{background:var(--amber);color:#3A2400;border-color:#D98C22;box-shadow:0 0 0 4px rgba(240,163,58,.35)}
+.gcard.used{visibility:hidden}
+.gcard.dragging{opacity:.35}
+.drag-ghost{position:fixed;z-index:999;pointer-events:none;transform:translate(-50%,-50%) scale(1.06);box-shadow:0 12px 24px rgba(0,0,0,.28)}
+.game-msg{margin-top:.9rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:.8rem 1rem;min-height:56px}
+.game-msg.win{background:#E4F6EE;border-color:#B2E0CB;color:#0C5F42}
+.game-msg .why{display:block;margin-top:.3rem;font-size:.95rem}
+.scene{display:flex;gap:.9rem;justify-content:space-between;font-size:1.5rem;margin-top:.9rem;opacity:.9}
+
+/* audio player */
+.player{background:linear-gradient(150deg,#1B4FA8,#2D8FE0);color:#fff;border-radius:var(--r-lg);padding:1.2rem}
+.player .controls{display:flex;gap:.55rem;flex-wrap:wrap;align-items:center}
+.player .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.35)}
+.player .btn-ghost:hover{background:rgba(255,255,255,.26)}
+.speed{display:flex;gap:.3rem;align-items:center;margin-left:auto}
+.speed button{font:inherit;font-weight:600;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:99px;padding:.3rem .7rem;cursor:pointer}
+.speed button[aria-pressed="true"]{background:#fff;color:var(--blue-deep)}
+.status{font-size:.88rem;color:#DCEBFF;margin-top:.6rem}
+.transcript{margin-top:1rem;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:1rem}
+
+/* results */
+.dash{display:grid;gap:1rem}
+@media(min-width:820px){.dash{grid-template-columns:300px 1fr}}
+.ring-wrap{display:grid;place-items:center;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.3rem;box-shadow:var(--shadow)}
+.ring{position:relative;width:190px;height:190px}
+.ring svg{transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:grid;place-items:center;font-family:"Outfit",sans-serif;font-size:2.5rem;font-weight:700}
+.bars{display:grid;gap:.75rem}
+.bar-row{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:.7rem .9rem}
+.bar-row .top{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:.35rem}
+.bar-row .track{height:12px;border-radius:99px;background:var(--wash-2);overflow:hidden}
+.bar-row .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--sky),var(--blue));width:0;transition:width .5s ease}
+.bar-row .fill.empty{background:#C9D6E8}
+.recap{display:grid;gap:.4rem;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));list-style:none;padding:0;margin:0}
+.recap li{background:var(--wash);border-radius:10px;padding:.5rem .7rem;font-size:.95rem}
+
+/* speaking + teacher */
+.prompt-card{border:1px solid var(--line);border-radius:var(--r-md);padding:.9rem;background:linear-gradient(180deg,#fff,#F7FBFF)}
+.prompt-card .s{font-weight:600;color:var(--blue-deep)}
+.prompt-card ul{margin:.5rem 0 0;padding-left:1.1rem;font-size:.94rem;color:var(--ink-soft)}
+details.teacher{border:1px solid var(--line);border-radius:var(--r-md);background:#fff;padding:.3rem .2rem}
+details.teacher summary{cursor:pointer;font-weight:600;padding:.6rem .9rem;border-radius:10px;list-style:none;display:flex;gap:.5rem;align-items:center}
+details.teacher summary::-webkit-details-marker{display:none}
+details.teacher summary::after{content:"▾";margin-left:auto;color:var(--ink-soft)}
+details.teacher[open] summary::after{content:"▴"}
+details.teacher .body{padding:0 .9rem .8rem}
+details.teacher ul{margin:.2rem 0 0;padding-left:1.1rem}
+details.teacher li{margin:.25rem 0}
+
+/* footer nav */
+.footnav{position:sticky;bottom:0;z-index:35;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom,0px))}
+.footnav-inner{max-width:1120px;margin:0 auto;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.footnav .where{font-size:.86rem;color:var(--ink-soft);margin-right:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.scroll-x{overflow-x:auto}
+
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --ink:#E8F0FB;--ink-soft:#A9BEDC;--surface:#12203A;--page:#0B162B;--wash:#17294A;--wash-2:#1C3157;
+  --line:#2A4372;--blue:#5C9DFF;--blue-deep:#2E7BF0;--shadow:0 10px 30px rgba(0,0,0,.35);
+  --good:#58D6A4;--good-bg:#12362A;--bad:#FF95A6;--bad-bg:#3A1722;
+ }
+ :root:not([data-theme="light"]) .topbar{background:rgba(18,32,58,.94)}
+ :root:not([data-theme="light"]) .tab{background:var(--surface)}
+ :root:not([data-theme="light"]) .passage{background:#16233D;border-color:#33456B}
+ :root:not([data-theme="light"]) .passage .ppc{background:#1C3A62}
+ :root:not([data-theme="light"]) .passage .mark-time{background:#3E3220}
+ :root:not([data-theme="light"]) .person,
+ :root:not([data-theme="light"]) .q-item,
+ :root:not([data-theme="light"]) .opt,
+ :root:not([data-theme="light"]) .bar-row,
+ :root:not([data-theme="light"]) .prompt-card,
+ :root:not([data-theme="light"]) .pron,
+ :root:not([data-theme="light"]) .te span,
+ :root:not([data-theme="light"]) .transcript,
+ :root:not([data-theme="light"]) details.teacher{background:var(--surface);color:var(--ink)}
+ :root:not([data-theme="light"]) .strip,
+ :root:not([data-theme="light"]) .chain,
+ :root:not([data-theme="light"]) .ex-list li,
+ :root:not([data-theme="light"]) .fs-for,
+ :root:not([data-theme="light"]) .fs-since{background:var(--wash)}
+ :root:not([data-theme="light"]) .sentence-card{background:#0E1B31;color:var(--ink)}
+ :root:not([data-theme="light"]) .gcard{background:#16294A;color:#CFE3FF;border-color:#2E4A7C;box-shadow:0 3px 0 #0D1C33}
+ :root:not([data-theme="light"]) .slot{background:#16294A;color:#9FC6FF}
+ :root:not([data-theme="light"]) .footnav{background:rgba(18,32,58,.95)}
+ :root:not([data-theme="light"]) .textrow input{background:#0E1B31;color:var(--ink)}
+ :root:not([data-theme="light"]) .btn-ghost{background:var(--surface);color:var(--ink)}
+}
+:root[data-theme="dark"]{
+  --ink:#E8F0FB;--ink-soft:#A9BEDC;--surface:#12203A;--page:#0B162B;--wash:#17294A;--wash-2:#1C3157;
+  --line:#2A4372;--blue:#5C9DFF;--blue-deep:#2E7BF0;--shadow:0 10px 30px rgba(0,0,0,.35);
+  --good:#58D6A4;--good-bg:#12362A;--bad:#FF95A6;--bad-bg:#3A1722;
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo-box"><img src="data:image/webp;base64,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" alt="Fluent Path logo: a blue speech bubble with a glowing sphere inside"></div>
+    <div>
+      <div class="brand-name">🌟 Fluent Path ESL Corner</div>
+      <div class="brand-sub">Present Perfect Continuous · Duration &amp; recent activity · B2</div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-top"><span>Lesson progress</span><span id="progPct">13%</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabrail" aria-label="Lesson sections">
+  <div class="tabrail-inner" role="tablist" id="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="welcome">🏠 Welcome <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="grammar">📘 Grammar Focus <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="practice">✏️ Practice <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="mastery">📖 Mastery <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="game">🎮 Grammar Game <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="listening">🎧 Listening <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="homework">📝 Homework <span class="dot" aria-hidden="true"></span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="results">🏆 Results <span class="dot" aria-hidden="true"></span></button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ================= WELCOME ================= -->
+<section class="panel" id="panel-welcome" role="tabpanel" aria-label="Welcome">
+  <div class="hero">
+    <div class="star">🌟 Fluent Path ESL Corner · Lesson 1</div>
+    <h1>How long have you been doing it?</h1>
+    <p>Let's talk about activities that started in the past and are continuing now — or have just stopped.</p>
+    <div class="timeline-hero">
+      <div class="tl-ends"><span>Past — the activity started</span><span>Now</span></div>
+      <div class="tl-line"><span class="tl-dot" aria-hidden="true"></span></div>
+      <div class="tl-ends"><span aria-hidden="true">⏱️ it keeps going…</span><span aria-hidden="true">✨ we see the result</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What we are learning today</h2>
+    <p>Today we will learn how to use the Present Perfect Continuous to talk about duration and recent activities. You will read, listen, play a detective game, and finish with a short homework test.</p>
+    <h3>By the end of this lesson you can:</h3>
+    <ul class="obj">
+      <li><span class="tick">✓</span> Form the Present Perfect Continuous</li>
+      <li><span class="tick">✓</span> Talk about activities that started in the past and continue now</li>
+      <li><span class="tick">✓</span> Talk about recently finished activities with present results</li>
+      <li><span class="tick">✓</span> Use <b>for</b> and <b>since</b> correctly</li>
+      <li><span class="tick">✓</span> Use <b>how long</b> to ask about duration</li>
+      <li><span class="tick">✓</span> Recognise common time expressions</li>
+      <li><span class="tick">✓</span> Tell the Present Perfect Continuous apart from similar structures</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Warm-up: what has each person been doing?</h2>
+    <p class="lede">Look at the eight people below and say the sentence out loud. Then cover the text and describe the picture again in your own words.</p>
+    <div class="people" id="peopleGrid"></div>
+    <div class="note" style="margin-top:1rem"><span>💙</span><span>You can use the fictional examples in this lesson. You do not need to share private information.</span></div>
+  </div>
+
+  <details class="teacher">
+    <summary>👩‍🏫 Teacher tips</summary>
+    <div class="body">
+      <ul>
+        <li>Ask the student to identify <b>have</b> or <b>has</b> first.</li>
+        <li>Ask: what is the main verb, and does it end in <b>-ing</b>?</li>
+        <li>Ask: is this sentence about a duration or about a recent result?</li>
+        <li>Ask: do we use <b>for</b> or <b>since</b> here, and why?</li>
+        <li>Ask the student to draw a quick timeline and mark the starting point.</li>
+        <li>For younger learners, mime the activity; for adults, ask for a work or study example.</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ================= GRAMMAR ================= -->
+<section class="panel" id="panel-grammar" role="tabpanel" aria-label="Grammar Focus" hidden>
+  <div class="section-head"><h1>Present Perfect Continuous</h1><span class="count">Duration + recent activity</span></div>
+
+  <div class="card">
+    <h2>A. The form</h2>
+    <div class="formula">
+      <span class="chip subj">subject</span><span class="plus">+</span>
+      <span class="chip aux">have / has</span><span class="plus">+</span>
+      <span class="chip been">been</span><span class="plus">+</span>
+      <span class="chip ing">verb-ing</span>
+    </div>
+    <ul class="ex-list">
+      <li>I <b>have been</b> reading.</li>
+      <li>She <b>has been</b> studying.</li>
+      <li>They <b>have been</b> practising.</li>
+    </ul>
+    <div class="pronoun-split">
+      <div class="pron"><b>I / you / we / they</b> → have been</div>
+      <div class="pron"><b>he / she / it</b> → has been</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>B. Use 1 — duration</h2>
+    <p>We use the Present Perfect Continuous for an activity that started in the past, continued over a period of time, and is still happening now or has a clear connection to now.</p>
+    <ul class="ex-list"><li>Daniel <b>has been practising</b> the guitar <b>for</b> three months.</li></ul>
+    <div class="strip">
+      <div class="bar" aria-hidden="true">🎸🎸🎸🎸🎸 →</div>
+      <div class="labels"><span>Past — he started</span><span>Now — he still plays</span></div>
+    </div>
+    <p>The activity started in the past and continues up to now.</p>
+    <div class="fs">
+      <div class="fs-card fs-for">
+        <h3>for</h3><div class="q">How long?</div>
+        <ul><li>for two hours</li><li>for three weeks</li><li>for several months</li><li>for a long time</li></ul>
+      </div>
+      <div class="fs-card fs-since">
+        <h3>since</h3><div class="q">When did it start?</div>
+        <ul><li>since Monday</li><li>since January</li><li>since 8 o'clock</li><li>since last summer</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>C. Use 2 — recent activity</h2>
+    <p>We also use it for an activity that has recently stopped, when we can still see or feel the result now.</p>
+    <div class="grid g2">
+      <div class="chain">
+        <span class="step">🎨 Emma has been painting</span>
+        <span class="arrow" aria-hidden="true">↓</span>
+        <span class="step">it finished a moment ago</span>
+        <span class="arrow" aria-hidden="true">↓</span>
+        <span class="step">🖐️ her hands are covered in paint</span>
+      </div>
+      <div class="chain">
+        <span class="step">🏃 Alex has been running</span>
+        <span class="arrow" aria-hidden="true">↓</span>
+        <span class="step">it finished a moment ago</span>
+        <span class="arrow" aria-hidden="true">↓</span>
+        <span class="step">😮‍💨 he is tired</span>
+      </div>
+    </div>
+    <p style="margin-top:1rem">The activity itself is important, because we can see or feel its result right now.</p>
+  </div>
+
+  <div class="card">
+    <h2>D. Questions</h2>
+    <div class="formula">
+      <span class="chip subj">how long</span><span class="plus">+</span>
+      <span class="chip aux">have / has</span><span class="plus">+</span>
+      <span class="chip subj">subject</span><span class="plus">+</span>
+      <span class="chip been">been</span><span class="plus">+</span>
+      <span class="chip ing">verb-ing</span><span class="plus">?</span>
+    </div>
+    <ul class="ex-list">
+      <li>How long <b>have</b> you <b>been learning</b> Spanish?</li>
+      <li>How long <b>has</b> Mia <b>been practising</b>?</li>
+      <li>How long <b>have</b> they <b>been working</b> on the project?</li>
+    </ul>
+    <p style="margin-top:.8rem">Use <b>how long</b> when you want to know the duration.</p>
+  </div>
+
+  <div class="card">
+    <h2>E. for vs since</h2>
+    <div class="fs">
+      <div class="fs-card fs-for">
+        <h3>for = a period of time</h3>
+        <ul><li>for five minutes</li><li>for two weeks</li><li>for several years</li></ul>
+        <div class="mini-tl">&lt;──── two weeks ────&gt;</div>
+      </div>
+      <div class="fs-card fs-since">
+        <h3>since = a starting point</h3>
+        <ul><li>since Monday</li><li>since 2025</li><li>since breakfast</li></ul>
+        <div class="mini-tl">Monday ●────────────── now</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>F. Negative</h2>
+    <div class="formula">
+      <span class="chip subj">subject</span><span class="plus">+</span>
+      <span class="chip aux">haven't / hasn't</span><span class="plus">+</span>
+      <span class="chip been">been</span><span class="plus">+</span>
+      <span class="chip ing">verb-ing</span>
+    </div>
+    <ul class="ex-list">
+      <li>I <b>haven't been</b> sleeping well.</li>
+      <li>She <b>hasn't been</b> practising recently.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>G. Common time expressions</h2>
+    <div class="te">
+      <span><i>⏱️</i>for</span><span><i>📍</i>since</span><span><i>❓</i>how long</span><span><i>🕐</i>all morning</span>
+      <span><i>📅</i>all week</span><span><i>🔄</i>recently</span><span><i>✨</i>lately</span><span><i>🎯</i>this week</span>
+    </div>
+    <p style="margin-top:.9rem">The context tells you which expression fits best — a clock time, a day, or a whole period.</p>
+  </div>
+
+  <div class="card">
+    <h2>H. Fix it!</h2>
+    <div class="fix">
+      <div class="fix-row">
+        <div class="wrong">❌ She has been <s>study</s> for two hours.</div>
+        <div class="right">✅ She has been <b>studying</b> for two hours.</div>
+      </div>
+      <div class="fix-row">
+        <div class="wrong">❌ I have been <s>practice</s> since Monday.</div>
+        <div class="right">✅ I have been <b>practising</b> since Monday.</div>
+      </div>
+      <div class="fix-row">
+        <div class="wrong">❌ He has been working <s>since</s> three hours.</div>
+        <div class="right">✅ He has been working <b>for</b> three hours.</div>
+      </div>
+    </div>
+    <ul class="obj" style="margin-top:1rem">
+      <li><span class="tick">✓</span> Always use the <b>-ing</b> form after <b>been</b>.</li>
+      <li><span class="tick">✓</span> Use <b>since</b> with a starting point.</li>
+      <li><span class="tick">✓</span> Use <b>for</b> with a period of time.</li>
+    </ul>
+  </div>
+
+  <details class="teacher">
+    <summary>👩‍🏫 Teacher tips</summary>
+    <div class="body"><ul>
+      <li>Drill the three chips out loud: have/has → been → verb-ing.</li>
+      <li>Say a time phrase and ask the student to shout "for!" or "since!".</li>
+      <li>Ask the student to turn each example into a <b>how long</b> question.</li>
+      <li>Ask the student to make one negative sentence about a fictional character.</li>
+    </ul></div>
+  </details>
+</section>
+
+<!-- ================= PRACTICE ================= -->
+<section class="panel" id="panel-practice" role="tabpanel" aria-label="Practice" hidden>
+  <div class="section-head"><h1>Practice</h1><span class="count">12 questions · feedback after every answer</span></div>
+  <div class="note" style="margin-bottom:1rem"><span>💙</span><span>All names and situations here are fictional. You do not need to share private information.</span></div>
+  <div id="practiceList"></div>
+  <div class="scorebox" id="practiceScore" hidden>
+    <div><div class="big" id="practiceBig">0 / 12</div><div id="practicePct">0%</div></div>
+    <div class="msg" id="practiceMsg"></div>
+  </div>
+  <div class="btnrow"><button class="btn btn-ghost" data-reset="practice">🔄 Try practice again</button></div>
+</section>
+
+<!-- ================= MASTERY ================= -->
+<section class="panel" id="panel-mastery" role="tabpanel" aria-label="Mastery reading" hidden>
+  <div class="section-head"><h1>A Busy Week</h1><span class="count">Reading · 6 questions</span></div>
+  <div class="passage">
+    <p>Zara lives in a small town with her grandmother and her younger brother, Idris. This week she <span class="ppc">has been</span> busier than usual.</p>
+    <p><span class="mark-time">Since Monday</span> she <span class="ppc">has been building</span> a model bridge for the school science fair. She <span class="ppc">has been measuring</span>, cutting and gluing small pieces of wood, and the kitchen table <span class="ppc">has been covered</span> with tools <span class="mark-time">for four days</span>. "<span class="mark-time">How long</span> have you <span class="ppc">been working</span> on that bridge?" her grandmother asked this morning. "For about ten hours in total," Zara laughed.</p>
+    <p>She <span class="ppc">has</span> also <span class="ppc">been rehearsing</span> a short speech about her design. <span class="mark-time">Lately</span> she <span class="ppc">has been recording</span> herself on her phone so that she can listen to her pronunciation. Her voice is a little tired, because she <span class="ppc">has been speaking</span> out loud <span class="mark-time">all evening</span>.</p>
+    <p>Idris <span class="ppc">has been helping</span> too. He <span class="ppc">has been drawing</span> the diagrams <span class="mark-time">since Tuesday</span>, and his fingers are grey from the pencils.</p>
+    <p><span class="mark-time">Recently</span> their grandmother <span class="ppc">has been growing</span> herbs on the balcony, and she <span class="ppc">has been looking</span> after them every morning <span class="mark-time">since the spring</span>. This afternoon she <span class="ppc">has been baking</span> bread, so the whole flat smells wonderful.</p>
+    <p>Zara <span class="ppc">has not been resting</span> much, but she is happy. She <span class="ppc">has been learning</span> something new every day.</p>
+    <div class="legend">
+      <span><i class="ppc">blue</i> = Present Perfect Continuous</span>
+      <span><i class="mark-time">orange</i> = time expression</span>
+    </div>
+  </div>
+  <h2 style="margin-top:1.4rem">Comprehension questions</h2>
+  <div id="masteryList"></div>
+  <div class="scorebox" id="masteryScore" hidden>
+    <div><div class="big" id="masteryBig">0 / 6</div><div id="masteryPct">0%</div></div>
+    <div class="msg" id="masteryMsg"></div>
+  </div>
+  <div class="btnrow"><button class="btn btn-ghost" data-reset="mastery">🔄 Try the questions again</button></div>
+  <details class="teacher" style="margin-top:1rem">
+    <summary>👩‍🏫 Teacher tips</summary>
+    <div class="body"><ul>
+      <li>Read one paragraph aloud, then ask the student to find every <b>been + verb-ing</b>.</li>
+      <li>Ask: which sentences show a visible result, and what is the result?</li>
+      <li>Ask the student to retell the week in three sentences.</li>
+    </ul></div>
+  </details>
+</section>
+
+<!-- ================= GAME ================= -->
+<section class="panel" id="panel-game" role="tabpanel" aria-label="Grammar game" hidden>
+  <div class="section-head"><h1>⏱️ Time Detective</h1><span class="count">10 rounds · 10 points each</span></div>
+  <p class="lede">Drag the missing grammar pieces into the empty boxes — or tap a card and then tap a box. Solve every case and the timeline is complete.</p>
+  <div class="game-stage">
+    <div class="game-top">
+      <div class="game-title">🔎 Case file</div>
+      <div class="game-meta">
+        <span class="pill" id="gameRound">Round 1 / 10</span>
+        <span class="pill" id="gameScore">⭐ Score: 0</span>
+      </div>
+    </div>
+    <div class="detective-line"><span>Past</span><span class="rule" aria-hidden="true"></span><span>⏱️ activity</span><span class="rule" aria-hidden="true"></span><span>Now</span></div>
+    <div class="sentence-card" id="sentenceCard"></div>
+    <div class="bank" id="cardBank"></div>
+    <div class="game-msg" id="gameMsg" role="status" aria-live="polite">Drag or tap the correct cards into the boxes.</div>
+    <div class="scene" aria-hidden="true"><span>🔎</span><span>⏱️</span><span>📅</span><span>⌛</span><span>🗓️</span><span>🧩</span><span>✨</span></div>
+    <div class="btnrow">
+      <button class="btn btn-ghost" id="gameHint">💡 Hint</button>
+      <button class="btn btn-primary" id="gameNext" hidden>Next round</button>
+    </div>
+  </div>
+  <div class="card" id="gameEnd" hidden style="margin-top:1.2rem">
+    <h2>🎉 Time Detective complete!</h2>
+    <div class="scorebox"><div><div class="big" id="gameBig">0 / 100</div><div id="gamePct">0%</div></div><div class="msg" id="gameEndMsg"></div></div>
+    <ul class="recap" style="margin-top:1rem">
+      <li>✓ Duration</li><li>✓ for / since</li><li>✓ been + verb-ing</li><li>✓ Recent activity</li>
+    </ul>
+    <div class="btnrow">
+      <button class="btn btn-primary" id="gameReplay">🔄 Play again</button>
+      <button class="btn btn-ghost" data-goto="grammar">📘 Review grammar</button>
+    </div>
+  </div>
+  <details class="teacher" style="margin-top:1rem">
+    <summary>👩‍🏫 Teacher tips</summary>
+    <div class="body"><ul>
+      <li>Before each drop, ask the student to say the full sentence aloud.</li>
+      <li>If they hesitate, ask: is the subject singular or plural?</li>
+      <li>After a correct round, ask them to change the time expression and keep the sentence correct.</li>
+    </ul></div>
+  </details>
+</section>
+
+<!-- ================= LISTENING ================= -->
+<section class="panel" id="panel-listening" role="tabpanel" aria-label="Listening" hidden>
+  <div class="section-head"><h1>Listen &amp; Discover</h1><span class="count">Audio · 6 questions</span></div>
+  <div class="player">
+    <h2 style="color:#fff;margin-bottom:.2rem">Amira's weekends</h2>
+    <p style="color:#DCEBFF">Listen first without the transcript. Then listen again and answer the questions.</p>
+    <div class="controls">
+      <button class="btn btn-ghost" id="btnPlay">▶ Play</button>
+      <button class="btn btn-ghost" id="btnPause">⏸ Pause</button>
+      <button class="btn btn-ghost" id="btnReplay">🔁 Replay</button>
+      <div class="speed" role="group" aria-label="Playback speed">
+        <button data-rate="0.75" aria-pressed="false">0.75×</button>
+        <button data-rate="1" aria-pressed="true">1×</button>
+        <button data-rate="1.25" aria-pressed="false">1.25×</button>
+      </div>
+    </div>
+    <div class="status" id="audioStatus" role="status" aria-live="polite">Ready. The audio is read aloud by your browser's voice.</div>
+  </div>
+  <div class="btnrow"><button class="btn btn-ghost" id="btnTranscript" aria-expanded="false">Show transcript</button></div>
+  <div class="transcript" id="transcript" hidden></div>
+  <h2 style="margin-top:1.4rem">Listening questions</h2>
+  <div id="listeningList"></div>
+  <div class="scorebox" id="listeningScore" hidden>
+    <div><div class="big" id="listeningBig">0 / 6</div><div id="listeningPct">0%</div></div>
+    <div class="msg" id="listeningMsg"></div>
+  </div>
+  <div class="btnrow"><button class="btn btn-ghost" data-reset="listening">🔄 Try the questions again</button></div>
+</section>
+
+<!-- ================= HOMEWORK ================= -->
+<section class="panel" id="panel-homework" role="tabpanel" aria-label="Homework" hidden>
+  <div class="section-head"><h1>Homework</h1><span class="count">12 questions · answer them all, then submit</span></div>
+  <p class="lede">Choose or type your answer for every question. Nothing is marked until you press submit, so you can change your mind.</p>
+  <div id="homeworkList"></div>
+  <div class="btnrow">
+    <button class="btn btn-primary" id="btnSubmitHw">Submit homework</button>
+    <button class="btn btn-ghost" data-reset="homework">🔄 Start homework again</button>
+  </div>
+  <div id="hwResults" hidden style="margin-top:1.4rem">
+    <h2>🏆 Homework results</h2>
+    <div class="scorebox"><div><div class="big" id="hwBig">0 / 12</div><div id="hwPct">0%</div></div><div class="msg" id="hwMsg"></div></div>
+    <div id="hwReview" style="margin-top:1rem"></div>
+  </div>
+</section>
+
+<!-- ================= RESULTS ================= -->
+<section class="panel" id="panel-results" role="tabpanel" aria-label="Results" hidden>
+  <div class="section-head"><h1>🌟 Your results</h1><span class="count">Updated automatically</span></div>
+  <div class="dash">
+    <div class="ring-wrap">
+      <div class="ring">
+        <svg width="190" height="190" viewBox="0 0 190 190" aria-hidden="true">
+          <circle cx="95" cy="95" r="80" fill="none" stroke="#DCE9FB" stroke-width="16"></circle>
+          <circle id="ringFill" cx="95" cy="95" r="80" fill="none" stroke="url(#grad)" stroke-width="16" stroke-linecap="round" stroke-dasharray="502.4" stroke-dashoffset="502.4"></circle>
+          <defs><linearGradient id="grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#45C2F7"></stop><stop offset="1" stop-color="#1246B8"></stop></linearGradient></defs>
+        </svg>
+        <div class="val" id="overallVal">0%</div>
+      </div>
+      <h3 style="margin-top:.8rem">Overall score</h3>
+      <p id="overallNote" style="font-size:.9rem;color:var(--ink-soft);margin:0">Finish an activity to see your score.</p>
+    </div>
+    <div class="bars" id="resultBars"></div>
+  </div>
+
+  <div class="card" style="margin-top:1.2rem">
+    <h2>What you practised</h2>
+    <ul class="recap">
+      <li>✓ Present Perfect Continuous</li><li>✓ Duration</li><li>✓ Recent activity</li>
+      <li>✓ for</li><li>✓ since</li><li>✓ how long</li>
+      <li>✓ have / has + been + verb-ing</li><li>✓ Negative sentences</li><li>✓ Time expressions</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Remember this</h2>
+    <div class="formula">
+      <span class="chip aux">have / has</span><span class="plus">+</span>
+      <span class="chip been">been</span><span class="plus">+</span>
+      <span class="chip ing">verb-ing</span>
+    </div>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="fs-card fs-for"><h3>⏱️ Duration</h3><p style="margin:0">Ibrahim has been learning to juggle since the school holidays.</p></div>
+      <div class="fs-card fs-since"><h3>✨ Recent activity</h3><p style="margin:0">Carla has been sweeping the yard, so the broom is still in her hand.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🗣️ Let's discuss!</h2>
+    <p class="lede">Talk about these fictional people. You do not need to talk about yourself.</p>
+    <div class="grid g2" id="speakingGrid"></div>
+    <div class="note" style="margin-top:1rem"><span>💙</span><span>You can use the fictional examples in this lesson. You do not need to share private information.</span></div>
+  </div>
+
+  <div class="btnrow">
+    <button class="btn btn-ghost" data-goto="grammar">📘 Review grammar</button>
+    <button class="btn btn-ghost" data-goto="game">🎮 Play game again</button>
+    <button class="btn btn-primary" id="btnRestart2">🔄 Restart lesson</button>
+  </div>
+
+  <details class="teacher" style="margin-top:1rem">
+    <summary>👩‍🏫 Teacher tips</summary>
+    <div class="body"><ul>
+      <li>For each speaking card ask: what activity is happening? When did it start? Is it still happening?</li>
+      <li>Ask: how long has it continued, and why do we use the Present Perfect Continuous?</li>
+      <li>Finish by asking the student to invent one new character and one new sentence.</li>
+    </ul></div>
+  </details>
+</section>
+
+</main>
+
+<nav class="footnav" aria-label="Lesson navigation">
+  <div class="footnav-inner">
+    <span class="where" id="whereNow">Section 1 of 8 · Welcome</span>
+    <button class="btn btn-ghost" id="btnHome">🏠 Home</button>
+    <button class="btn btn-ghost" id="btnBack">← Back</button>
+    <button class="btn btn-primary" id="btnNext">Next →</button>
+    <button class="btn btn-soft" id="btnRestart">🔄 Restart lesson</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= DATA ================= */
+
+var PEOPLE = [
+  {e:"📚", n:"Noor", s:"She has been reading the same adventure novel since Friday."},
+  {e:"🎨", n:"Kenji", s:"He has been painting a poster for the art club."},
+  {e:"🎻", n:"Elena", s:"She has been practising the violin all morning."},
+  {e:"🌱", n:"Tariq", s:"He has been watering the tomato plants for twenty minutes."},
+  {e:"🏃", n:"Priya", s:"She has been stretching before her swimming lesson."},
+  {e:"💻", n:"Diego", s:"He has been building a weather app for his coding class."},
+  {e:"🍳", n:"Aya", s:"She has been chopping vegetables for the soup."},
+  {e:"📖", n:"Bilal", s:"He has been revising for the geography quiz since lunch."}
+];
+
+var PRACTICE = [
+  {type:"mc", kind:"Multiple choice", q:"Rina ___ been learning French for six months.",
+   options:["has","is","does"], answer:0,
+   why:"Rina is he/she/it, so we use HAS + been + verb-ing."},
+  {type:"mc", kind:"Choose the correct form", q:"They have been ___ the garden since early morning.",
+   options:["clean","cleaning","cleaned"], answer:1,
+   why:"After BEEN we always use the -ing form of the main verb."},
+  {type:"mc", kind:"for or since", q:"Marcus has been practising since ___.",
+   options:["three hours","Monday","two weeks"], answer:1,
+   why:"SINCE needs a starting point, and Monday is a point in time."},
+  {type:"text", kind:"Fill in the blank", q:"We ______ been waiting at the bus stop for ten minutes.",
+   accept:["have","'ve","ve"], answer:"have",
+   why:"We / you / they / I take HAVE been."},
+  {type:"mc", kind:"for or since", q:"Yuki has been taking photographs ___ sunrise.",
+   options:["for","since"], answer:1,
+   why:"Sunrise is the moment the activity started, so we use SINCE."},
+  {type:"mc", kind:"for or since", q:"The club has been collecting bottle caps ___ four weeks.",
+   options:["for","since"], answer:0,
+   why:"Four weeks is a length of time, so we use FOR."},
+  {type:"mc", kind:"Correct the sentence", q:"Which sentence is correct?",
+   options:["Hassan has been ride his bicycle around the lake.","Hassan has been riding his bicycle around the lake.","Hassan has being riding his bicycle around the lake."], answer:1,
+   why:"The pattern is has + been + riding. BEEN never changes."},
+  {type:"mc", kind:"Complete the question", q:"___ has Clara been folding origami cranes?",
+   options:["How long","How many","How often"], answer:0,
+   why:"HOW LONG asks about duration — the answer will be a period or a starting point."},
+  {type:"mc", kind:"Identify the structure", q:"Which sentence is in the Present Perfect Continuous?",
+   options:["Farah is baking bread for the market.","Farah has been baking bread all afternoon.","Farah baked bread yesterday morning."], answer:1,
+   why:"Only has been baking follows have/has + been + verb-ing."},
+  {type:"text", kind:"Fill in the blank", q:"Yusuf hasn't ______ checking his messages during class.",
+   accept:["been"], answer:"been",
+   why:"The negative keeps BEEN: hasn't + been + verb-ing."},
+  {type:"mc", kind:"Multiple choice", q:"___ you been working on the science poster since breakfast?",
+   options:["Have","Has","Are"], answer:0,
+   why:"In questions the auxiliary comes first: Have you been…?"},
+  {type:"mc", kind:"Why this tense?", q:"\u201cOmar has been cycling, so his face is red.\u201d Why do we use the Present Perfect Continuous?",
+   options:["The activity happens every year.","The activity stopped a moment ago and we can see the result now.","The activity will start tomorrow."], answer:1,
+   why:"This is the recent-activity use: the cycling has just stopped and the result is visible."}
+];
+
+var MASTERY = [
+  {type:"mc", kind:"Multiple choice", q:"How long has Zara been building the model bridge?",
+   options:["Since Monday","For ten weeks","Since the spring"], answer:0,
+   why:"The text says she has been building it since Monday — a starting point."},
+  {type:"mc", kind:"True or false", q:"True or false: Idris started drawing the diagrams on Tuesday.",
+   options:["True","False"], answer:0,
+   why:"He has been drawing the diagrams since Tuesday, so Tuesday is the starting point."},
+  {type:"text", kind:"Fill in the blank", q:"Their grandmother has been looking after the herbs ______ the spring.",
+   accept:["since"], answer:"since",
+   why:"The spring is when the activity began, so SINCE is correct."},
+  {type:"mc", kind:"Identify the duration", q:"About how many hours has Zara spent on the bridge in total?",
+   options:["About four hours","About ten hours","About twenty hours"], answer:1,
+   why:"She answers her grandmother with a total duration: for about ten hours."},
+  {type:"mc", kind:"for or since", q:"In \u201cthe kitchen table has been covered with tools for four days\u201d, which word introduces a period of time?",
+   options:["for","since","how long"], answer:0,
+   why:"FOR introduces a length of time — here, four days."},
+  {type:"mc", kind:"Why this tense?", q:"Why does the writer say \u201cshe has been speaking out loud all evening\u201d?",
+   options:["To explain a plan for tomorrow","To explain the result we notice now — her tired voice","To describe a single short action"], answer:1,
+   why:"The recent activity explains a present result: her voice is tired."}
+];
+
+var LISTENING_TEXT = "Hello! My name is Amira, and I want to tell you about my weekends. " +
+"For the last three months I have been volunteering at a small community centre near my school. " +
+"Every Saturday morning I have been helping younger children with their reading. " +
+"How long have I been doing this? Since the beginning of June, so almost thirteen weeks. " +
+"Lately I have been learning sign language as well. My cousin Ferran has been teaching me since we met at a summer camp, " +
+"and we practise online for twenty minutes every Sunday. " +
+"This week has been especially busy. I have been preparing a short presentation about sea turtles, " +
+"so there are photographs all over my bedroom floor. I have been searching for pictures all week. " +
+"My brother has been restoring an old bicycle in the garage, and recently his hands have been covered in oil every evening. " +
+"He hasn't been taking many breaks either! " +
+"How long have you been studying English? I hope you have been enjoying it.";
+
+var LISTENING = [
+  {type:"mc", kind:"What activity?", q:"What has Amira been doing at the community centre?",
+   options:["Helping younger children with their reading","Selling tickets for a concert","Painting a wall"], answer:0,
+   why:"She says she has been helping younger children with their reading every Saturday morning."},
+  {type:"mc", kind:"How long?", q:"How long has she been volunteering?",
+   options:["For three months","For thirteen years","For one weekend"], answer:0,
+   why:"FOR three months gives the length of time up to now."},
+  {type:"mc", kind:"Starting point", q:"Which starting point does she mention for the volunteering?",
+   options:["Since last winter","Since the beginning of June","Since 2020"], answer:1,
+   why:"SINCE the beginning of June marks when the activity started."},
+  {type:"mc", kind:"Identify the structure", q:"Which sentence from the talk is in the Present Perfect Continuous?",
+   options:["My name is Amira.","Ferran has been teaching me since we met.","We practise online every Sunday."], answer:1,
+   why:"Has been teaching follows has + been + verb-ing."},
+  {type:"mc", kind:"Why this tense?", q:"Why does she mention the oil on her brother's hands?",
+   options:["It is the visible result of a recent activity.","It is a plan for next month.","It is a rule at the community centre."], answer:0,
+   why:"The recent activity — restoring the bicycle — leaves a result we can see now."},
+  {type:"mc", kind:"Which word?", q:"Complete the sentence: \u201cI have been ______ for pictures all week.\u201d",
+   options:["search","searching","searched"], answer:1,
+   why:"After BEEN we use the -ing form: been searching."}
+];
+
+var HOMEWORK = [
+  {type:"mc", kind:"have or has", q:"Layla ___ been keeping a nature diary since March.",
+   options:["has","have","is"], answer:0,
+   why:"Layla is she, so the auxiliary is HAS."},
+  {type:"mc", kind:"verb-ing", q:"The gardeners have been ___ sunflower seeds all afternoon.",
+   options:["plant","planted","planting"], answer:2,
+   why:"BEEN is always followed by the -ing form."},
+  {type:"mc", kind:"for or since", q:"Rashid has been editing his travel video ___ two evenings.",
+   options:["for","since"], answer:0,
+   why:"Two evenings is a period of time, so we use FOR."},
+  {type:"mc", kind:"for or since", q:"The astronomy club has been watching the sky ___ nine o'clock.",
+   options:["for","since"], answer:1,
+   why:"Nine o'clock is a point in time, so we use SINCE."},
+  {type:"text", kind:"Complete the question", q:"How long ______ they been feeding the fish?",
+   accept:["have"], answer:"have",
+   why:"They takes HAVE, and in a question it comes before the subject."},
+  {type:"mc", kind:"Negative", q:"We ___ been practising calligraphy this week.",
+   options:["haven't","hasn't","didn't"], answer:0,
+   why:"We takes HAVEN'T + been + verb-ing."},
+  {type:"mc", kind:"Sentence correction", q:"Which sentence is correct?",
+   options:["Nina has been learn to swim since the summer.","Nina has been learning to swim since the summer.","Nina has been learned to swim since the summer."], answer:1,
+   why:"The main verb after BEEN must be learning."},
+  {type:"mc", kind:"how long", q:"___ long has Samir been folding the laundry?",
+   options:["How","What","Which"], answer:0,
+   why:"HOW LONG is the question phrase for duration."},
+  {type:"mc", kind:"Recent activity", q:"The puppy has been digging in the sand, so ___",
+   options:["its paws are dirty now.","it will dig again next year.","it digs every single day."], answer:0,
+   why:"The recent activity explains a result we can see right now."},
+  {type:"text", kind:"Fill in the blank", q:"They have ______ collecting paper for the recycling project.",
+   accept:["been"], answer:"been",
+   why:"The pattern is have + been + verb-ing; BEEN cannot be left out."},
+  {type:"mc", kind:"Time expressions", q:"Which time expression goes with SINCE?",
+   options:["for ten days","since last winter","all morning"], answer:1,
+   why:"SINCE is followed by a starting point such as last winter."},
+  {type:"mc", kind:"Duration", q:"Which sentence talks about a duration that continues up to now?",
+   options:["Hana finished the puzzle last night.","Hana has been solving the puzzle for an hour.","Hana will solve the puzzle tomorrow."], answer:1,
+   why:"Has been solving + for an hour shows an activity continuing until now."}
+];
+
+var SPEAKING = [
+  {s:"Sam has been learning photography.", q:["How long has Sam been learning photography?","What does Sam take photographs of?"]},
+  {s:"Mei has been designing a board game with her classmates.", q:["When did the group start the game?","Is the game finished yet?"]},
+  {s:"Youssef has been repairing his grandfather's old radio.", q:["How long has the repair continued?","What can we see on his hands?"]},
+  {s:"Ines has been writing a song for the school festival.", q:["Has she finished the song?","How many hours has she been writing?"]},
+  {s:"Nikolai has been counting birds in the park each weekend.", q:["Since when has he been counting?","Why do we use the Present Perfect Continuous here?"]}
+];
+
+var ROUNDS = [
+  {parts:[{t:"x",v:"Nadia "},{t:"s",a:"has"},{t:"x",v:" been decorating the classroom window since noon."}],
+   bank:["has","have","is","was"], hint:"Nadia = she. Which auxiliary do we use for he / she / it?",
+   why:"He / she / it takes HAS + been + verb-ing."},
+  {parts:[{t:"x",v:"The volunteers have "},{t:"s",a:"been"},{t:"x",v:" sorting library books all morning."}],
+   bank:["been","being","is","was"], hint:"Between have/has and the -ing verb there is always one small word.",
+   why:"The middle piece is always BEEN — it never changes."},
+  {parts:[{t:"x",v:"Lina has been "},{t:"s",a:"drawing"},{t:"x",v:" a comic about a brave robot."}],
+   bank:["drawing","draw","drew","drawn"], hint:"After BEEN the main verb takes one special ending.",
+   why:"After BEEN the main verb always ends in -ing."},
+  {parts:[{t:"x",v:"Adam has been training for the relay race "},{t:"s",a:"for"},{t:"x",v:" six weeks."}],
+   bank:["for","since","ago","from"], hint:"Six weeks is a length of time, not a starting point.",
+   why:"FOR is used with a period of time, such as six weeks."},
+  {parts:[{t:"x",v:"Our team has been testing the new game "},{t:"s",a:"since"},{t:"x",v:" Thursday afternoon."}],
+   bank:["since","for","during","while"], hint:"Thursday afternoon tells us when the activity began.",
+   why:"SINCE is used with a starting point, such as Thursday afternoon."},
+  {parts:[{t:"s",a:"how long"},{t:"x",v:" "},{t:"s",a:"has"},{t:"x",v:" Karim been repairing the old clock?"}],
+   bank:["how long","has","have","what time"], hint:"We want the duration, and Karim is one person.",
+   why:"Duration questions begin with HOW LONG + has/have + subject + been + verb-ing."},
+  {parts:[{t:"x",v:"The twins "},{t:"s",a:"haven't"},{t:"x",v:" been "},{t:"s",a:"tidying"},{t:"x",v:" their room this week."}],
+   bank:["haven't","hasn't","tidying","tidied"], hint:"Twins are plural, and the main verb still needs -ing.",
+   why:"A plural subject takes HAVEN'T, and BEEN keeps the -ing form after it."},
+  {parts:[{t:"x",v:"Sofia has "},{t:"s",a:"been"},{t:"x",v:" "},{t:"s",a:"working"},{t:"x",v:" in the greenhouse, so her boots are muddy."}],
+   bank:["been","working","work","being"], hint:"Remember: have/has + been + verb-ing.",
+   why:"The muddy boots are the visible result of an activity that has just stopped."},
+  {parts:[{t:"x",v:"Ravi "},{t:"s",a:"has"},{t:"x",v:" "},{t:"s",a:"been"},{t:"x",v:" "},{t:"s",a:"solving"},{t:"x",v:" chess problems every evening this month."}],
+   bank:["has","been","solving","solved","have","solve"], hint:"Build the three pieces in order: auxiliary, been, -ing verb.",
+   why:"The full structure is subject + has + been + verb-ing."},
+  {parts:[{t:"x",v:"The choir "},{t:"s",a:"has"},{t:"x",v:" "},{t:"s",a:"been"},{t:"x",v:" "},{t:"s",a:"rehearsing"},{t:"x",v:" for the spring concert "},{t:"s",a:"for"},{t:"x",v:" two months."}],
+   bank:["has","been","rehearsing","for","since","have"], hint:"The choir is one group, and two months is a length of time.",
+   why:"A singular group takes HAS been + verb-ing, and FOR introduces the period of time."}
+];
+
+/* ================= STATE ================= */
+
+var TABS = ["welcome","grammar","practice","mastery","game","listening","homework","results"];
+var TAB_LABELS = {welcome:"Welcome",grammar:"Grammar Focus",practice:"Practice",mastery:"Mastery",game:"Grammar Game",listening:"Listening",homework:"Homework",results:"Results"};
+var current = 0;
+
+var state = {
+  practice:{correct:0, answered:0, total:PRACTICE.length, done:false},
+  mastery:{correct:0, answered:0, total:MASTERY.length, done:false},
+  game:{points:0, round:0, done:false},
+  listening:{correct:0, answered:0, total:LISTENING.length, done:false},
+  homework:{correct:0, total:HOMEWORK.length, submitted:false}
+};
+
+var $ = function(s,r){return (r||document).querySelector(s);};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function pct(a,b){return b? Math.round(a/b*100):0;}
+function band(p){
+  if(p>=90) return "Excellent work! You are using the structure confidently.";
+  if(p>=80) return "Great work! You have a good understanding of the grammar.";
+  if(p>=70) return "Good progress! Review FOR, SINCE, and the sentence structure.";
+  return "Keep practising! Review the Grammar Focus and try the activities again.";
+}
+function shuffle(a){
+  var arr=a.slice();
+  for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}
+  return arr;
+}
+
+/* ================= NAVIGATION ================= */
+
+function showTab(name, skipScroll){
+  var i = TABS.indexOf(name);
+  if(i<0) return;
+  current = i;
+  TABS.forEach(function(t){ $("#panel-"+t).hidden = (t!==name); });
+  $$(".tab").forEach(function(b){ b.setAttribute("aria-selected", String(b.dataset.tab===name)); });
+  $("#whereNow").textContent = "Section "+(i+1)+" of "+TABS.length+" · "+TAB_LABELS[name];
+  var p = Math.round((i+1)/TABS.length*100);
+  $("#progFill").style.width = p+"%";
+  $("#progPct").textContent = p+"%";
+  $("#btnBack").disabled = (i===0);
+  $("#btnNext").disabled = (i===TABS.length-1);
+  if(name==="results") renderResults();
+  var active = $$(".tab")[i];
+  if(active && active.scrollIntoView) active.scrollIntoView({block:"nearest", inline:"center"});
+  if(!skipScroll) window.scrollTo({top:0, behavior:"smooth"});
+}
+
+$$(".tab").forEach(function(b){ b.addEventListener("click", function(){ showTab(b.dataset.tab); }); });
+$("#tablist").addEventListener("keydown", function(e){
+  if(e.key!=="ArrowRight" && e.key!=="ArrowLeft") return;
+  var d = e.key==="ArrowRight" ? 1 : -1;
+  var n = Math.min(TABS.length-1, Math.max(0, current+d));
+  showTab(TABS[n], true);
+  $$(".tab")[n].focus();
+  e.preventDefault();
+});
+$("#btnNext").addEventListener("click", function(){ if(current<TABS.length-1) showTab(TABS[current+1]); });
+$("#btnBack").addEventListener("click", function(){ if(current>0) showTab(TABS[current-1]); });
+$("#btnHome").addEventListener("click", function(){ showTab("welcome"); });
+$$("[data-goto]").forEach(function(b){ b.addEventListener("click", function(){ showTab(b.dataset.goto); }); });
+
+function markDone(name, done){
+  var tab = $$(".tab").filter(function(b){return b.dataset.tab===name;})[0];
+  if(tab) tab.classList.toggle("done", !!done);
+}
+
+/* ================= WARM-UP + SPEAKING ================= */
+
+$("#peopleGrid").innerHTML = PEOPLE.map(function(p){
+  return '<div class="person"><div class="emoji" aria-hidden="true">'+p.e+'</div>'+
+         '<div class="who">'+p.n+'</div><div class="what">'+esc(p.s)+'</div></div>';
+}).join("");
+
+$("#speakingGrid").innerHTML = SPEAKING.map(function(p){
+  return '<div class="prompt-card"><div class="s">'+esc(p.s)+'</div><ul>'+
+    p.q.map(function(q){return "<li>"+esc(q)+"</li>";}).join("")+
+    '<li>Is the activity still happening?</li></ul></div>';
+}).join("");
+
+/* ================= QUIZ ENGINE ================= */
+
+function norm(s){ return String(s).toLowerCase().replace(/[^a-z']/g,""); }
+
+function renderQuiz(listEl, items, key){
+  listEl.innerHTML = "";
+  items.forEach(function(item, idx){
+    var wrap = document.createElement("div");
+    wrap.className = "q-item";
+    var head = '<div class="q-head"><span class="q-num">'+(idx+1)+'</span>'+
+               '<span class="q-text">'+esc(item.q)+'</span>'+
+               '<span class="q-kind">'+esc(item.kind)+'</span></div>';
+    var bodyHtml = "";
+    if(item.type==="mc"){
+      bodyHtml = '<div class="opts">'+ item.options.map(function(o,i){
+        return '<button class="opt" type="button" data-i="'+i+'"><span class="mark" aria-hidden="true">'+
+               String.fromCharCode(65+i)+'.</span>'+esc(o)+'</button>';
+      }).join("") + '</div>';
+    } else {
+      bodyHtml = '<div class="textrow"><label class="sr" for="'+key+'-in-'+idx+'">Your answer for question '+(idx+1)+'</label>'+
+                 '<input id="'+key+'-in-'+idx+'" type="text" autocomplete="off" spellcheck="false" placeholder="Type one word">'+
+                 '<button class="btn btn-primary" type="button" data-check="1">Check</button></div>';
+    }
+    wrap.innerHTML = head + bodyHtml + '<div class="fb" hidden></div>';
+    listEl.appendChild(wrap);
+
+    var fb = $(".fb", wrap);
+
+    function reveal(isRight, given){
+      wrap.classList.add("answered");
+      fb.hidden = false;
+      fb.className = "fb " + (isRight?"ok":"no");
+      var correctText = item.type==="mc" ? item.options[item.answer] : item.answer;
+      fb.innerHTML = '<span class="line"><b>'+(isRight?"✅ Correct!":"❌ Not quite!")+'</b></span>'+
+        (given!==undefined && !isRight ? '<span class="line">Your answer: '+esc(given)+'</span>' : '')+
+        '<span class="line">Correct answer: <b>'+esc(correctText)+'</b></span>'+
+        '<span class="line">Why: '+esc(item.why)+'</span>';
+      state[key].answered++;
+      if(isRight) state[key].correct++;
+      updateSectionScore(key);
+    }
+
+    if(item.type==="mc"){
+      $$(".opt", wrap).forEach(function(btn){
+        btn.addEventListener("click", function(){
+          var chosen = parseInt(btn.dataset.i,10);
+          var right = chosen===item.answer;
+          $$(".opt", wrap).forEach(function(b){
+            b.disabled = true;
+            if(parseInt(b.dataset.i,10)===item.answer){ b.classList.add("is-correct"); b.querySelector(".mark").textContent="✓"; }
+          });
+          if(!right){ btn.classList.add("is-wrong"); btn.querySelector(".mark").textContent="✕"; }
+          reveal(right);
+        });
+      });
+    } else {
+      var input = $("input", wrap), checkBtn = $("[data-check]", wrap);
+      function doCheck(){
+        var v = input.value.trim();
+        if(!v){ input.focus(); return; }
+        var right = item.accept.some(function(a){ return norm(a)===norm(v); });
+        input.disabled = true; checkBtn.disabled = true;
+        reveal(right, v);
+      }
+      checkBtn.addEventListener("click", doCheck);
+      input.addEventListener("keydown", function(e){ if(e.key==="Enter"){ e.preventDefault(); doCheck(); }});
+    }
+  });
+}
+
+function updateSectionScore(key){
+  var s = state[key];
+  var box = $("#"+key+"Score");
+  if(!box) return;
+  $("#"+key+"Big").textContent = s.correct+" / "+s.total;
+  var p = pct(s.correct, s.total);
+  $("#"+key+"Pct").textContent = p+"%";
+  if(s.answered===s.total){
+    s.done = true;
+    box.hidden = false;
+    $("#"+key+"Msg").textContent = band(p);
+    markDone(key, true);
+  }
+}
+
+/* ================= HOMEWORK ================= */
+
+function renderHomework(){
+  var listEl = $("#homeworkList");
+  listEl.innerHTML = "";
+  HOMEWORK.forEach(function(item, idx){
+    var wrap = document.createElement("div");
+    wrap.className = "q-item";
+    var body;
+    if(item.type==="mc"){
+      body = '<div class="opts">'+item.options.map(function(o,i){
+        return '<button class="opt" type="button" data-i="'+i+'" aria-pressed="false"><span class="mark" aria-hidden="true">'+
+               String.fromCharCode(65+i)+'.</span>'+esc(o)+'</button>';
+      }).join("")+'</div>';
+    } else {
+      body = '<div class="textrow"><label class="sr" for="hw-in-'+idx+'">Your answer for question '+(idx+1)+'</label>'+
+             '<input id="hw-in-'+idx+'" type="text" autocomplete="off" spellcheck="false" placeholder="Type one word"></div>';
+    }
+    wrap.innerHTML = '<div class="q-head"><span class="q-num">'+(idx+1)+'</span><span class="q-text">'+esc(item.q)+
+                     '</span><span class="q-kind">'+esc(item.kind)+'</span></div>'+body;
+    listEl.appendChild(wrap);
+    if(item.type==="mc"){
+      $$(".opt", wrap).forEach(function(btn){
+        btn.addEventListener("click", function(){
+          if(state.homework.submitted) return;
+          $$(".opt", wrap).forEach(function(b){ b.classList.remove("is-correct"); b.setAttribute("aria-pressed","false"); b.style.borderColor=""; });
+          btn.setAttribute("aria-pressed","true");
+          btn.style.borderColor = "var(--blue-deep)";
+          wrap.dataset.chosen = btn.dataset.i;
+        });
+      });
+    }
+  });
+}
+
+$("#btnSubmitHw").addEventListener("click", function(){
+  var items = $$("#homeworkList .q-item");
+  var missing = 0;
+  var answers = HOMEWORK.map(function(item, i){
+    var wrap = items[i];
+    if(item.type==="mc"){
+      if(wrap.dataset.chosen===undefined){ missing++; return null; }
+      return parseInt(wrap.dataset.chosen,10);
+    }
+    var v = $("input", wrap).value.trim();
+    if(!v){ missing++; return ""; }
+    return v;
+  });
+  if(missing>0){
+    var msg = $("#hwMsg");
+    $("#hwResults").hidden = false;
+    $("#hwBig").textContent = "—";
+    $("#hwPct").textContent = missing+" question"+(missing>1?"s":"")+" still empty";
+    msg.textContent = "Answer every question, then press submit again.";
+    $("#hwReview").innerHTML = "";
+    $("#hwResults").scrollIntoView({behavior:"smooth", block:"start"});
+    return;
+  }
+  var correct = 0;
+  var review = HOMEWORK.map(function(item, i){
+    var given = answers[i], right, givenText, correctText;
+    if(item.type==="mc"){
+      right = given===item.answer;
+      givenText = item.options[given];
+      correctText = item.options[item.answer];
+    } else {
+      right = item.accept.some(function(a){ return norm(a)===norm(given); });
+      givenText = given;
+      correctText = item.answer;
+    }
+    if(right) correct++;
+    return '<div class="q-item"><div class="q-head"><span class="q-num">'+(i+1)+'</span>'+
+      '<span class="q-text">'+esc(item.q)+'</span></div>'+
+      '<div class="fb '+(right?"ok":"no")+'" style="margin-top:.2rem">'+
+      '<span class="line"><b>'+(right?"✅ Correct!":"❌ Not quite!")+'</b></span>'+
+      '<span class="line">Your answer: '+esc(givenText)+'</span>'+
+      '<span class="line">Correct answer: <b>'+esc(correctText)+'</b></span>'+
+      '<span class="line">Why: '+esc(item.why)+'</span></div></div>';
+  }).join("");
+
+  state.homework.correct = correct;
+  state.homework.submitted = true;
+  markDone("homework", true);
+  var p = pct(correct, HOMEWORK.length);
+  $("#hwResults").hidden = false;
+  $("#hwBig").textContent = correct+" / "+HOMEWORK.length;
+  $("#hwPct").textContent = p+"%";
+  $("#hwMsg").textContent = band(p);
+  $("#hwReview").innerHTML = review;
+  $$("#homeworkList .opt").forEach(function(b){ b.disabled = true; });
+  $$("#homeworkList input").forEach(function(b){ b.disabled = true; });
+  $("#hwResults").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+/* ================= GAME ================= */
+
+var gameOrder = [], gRound = 0, selectedCard = null, dragGhost = null, hoverSlot = null;
+
+function startGame(){
+  gameOrder = shuffle(ROUNDS);
+  gRound = 0;
+  state.game.points = 0;
+  state.game.round = 0;
+  state.game.done = false;
+  $("#gameEnd").hidden = true;
+  $("#gameNext").hidden = true;
+  markDone("game", false);
+  loadRound();
+}
+
+function loadRound(){
+  var r = gameOrder[gRound];
+  selectedCard = null;
+  $("#gameRound").textContent = "Round "+(gRound+1)+" / "+gameOrder.length;
+  $("#gameScore").textContent = "⭐ Score: "+state.game.points;
+  $("#gameMsg").className = "game-msg";
+  $("#gameMsg").textContent = "Drag or tap the correct cards into the boxes.";
+  $("#gameNext").hidden = true;
+
+  var slotIndex = 0;
+  $("#sentenceCard").innerHTML = r.parts.map(function(p){
+    if(p.t==="x") return esc(p.v);
+    var i = slotIndex++;
+    return '<button type="button" class="slot" data-slot="'+i+'" data-answer="'+esc(p.a)+'" aria-label="Empty word box '+(i+1)+'">____</button>';
+  }).join("");
+
+  $("#cardBank").innerHTML = shuffle(r.bank).map(function(w,i){
+    return '<button type="button" class="gcard" data-word="'+esc(w)+'">'+esc(w)+'</button>';
+  }).join("");
+
+  $$("#cardBank .gcard").forEach(attachCard);
+  $$("#sentenceCard .slot").forEach(function(sl){
+    sl.addEventListener("click", function(){
+      if(selectedCard) tryPlace(selectedCard, sl);
+    });
+  });
+}
+
+function attachCard(card){
+  card.addEventListener("click", function(){
+    if(card.classList.contains("used")) return;
+    if(selectedCard===card){ card.classList.remove("selected"); selectedCard=null; return; }
+    $$("#cardBank .gcard").forEach(function(c){ c.classList.remove("selected"); });
+    card.classList.add("selected");
+    selectedCard = card;
+    $("#gameMsg").textContent = "Now tap the box where \u201c"+card.dataset.word+"\u201d belongs.";
+  });
+
+  card.addEventListener("pointerdown", function(e){
+    if(card.classList.contains("used")) return;
+    if(e.pointerType==="mouse" && e.button!==0) return;
+    var startX=e.clientX, startY=e.clientY, moved=false;
+    card.setPointerCapture(e.pointerId);
+
+    function onMove(ev){
+      var dx=ev.clientX-startX, dy=ev.clientY-startY;
+      if(!moved && Math.abs(dx)+Math.abs(dy)<8) return;
+      if(!moved){
+        moved = true;
+        card.classList.add("dragging");
+        dragGhost = card.cloneNode(true);
+        dragGhost.classList.add("drag-ghost");
+        dragGhost.classList.remove("dragging","selected");
+        document.body.appendChild(dragGhost);
+      }
+      dragGhost.style.left = ev.clientX+"px";
+      dragGhost.style.top = ev.clientY+"px";
+      var el = document.elementFromPoint(ev.clientX, ev.clientY);
+      var slot = el && el.closest ? el.closest(".slot") : null;
+      if(hoverSlot && hoverSlot!==slot) hoverSlot.classList.remove("over");
+      if(slot && !slot.classList.contains("filled")) slot.classList.add("over");
+      hoverSlot = slot;
+      ev.preventDefault();
+    }
+    function onUp(ev){
+      card.removeEventListener("pointermove", onMove);
+      card.removeEventListener("pointerup", onUp);
+      card.removeEventListener("pointercancel", onUp);
+      card.classList.remove("dragging");
+      if(dragGhost){ dragGhost.remove(); dragGhost=null; }
+      if(hoverSlot){ hoverSlot.classList.remove("over"); }
+      if(moved){
+        var el = document.elementFromPoint(ev.clientX, ev.clientY);
+        var slot = el && el.closest ? el.closest(".slot") : null;
+        if(slot) tryPlace(card, slot);
+      }
+      hoverSlot = null;
+    }
+    card.addEventListener("pointermove", onMove);
+    card.addEventListener("pointerup", onUp);
+    card.addEventListener("pointercancel", onUp);
+  });
+}
+
+function tryPlace(card, slot){
+  if(slot.classList.contains("filled")) return;
+  var word = card.dataset.word;
+  if(word.toLowerCase() === slot.dataset.answer.toLowerCase()){
+    slot.textContent = word;
+    slot.classList.add("filled");
+    slot.setAttribute("aria-label","Filled with "+word);
+    card.classList.add("used");
+    card.classList.remove("selected");
+    selectedCard = null;
+    $("#gameMsg").className = "game-msg";
+    $("#gameMsg").textContent = "✨ That piece fits.";
+    checkRoundComplete();
+  } else {
+    slot.classList.add("shake");
+    setTimeout(function(){ slot.classList.remove("shake"); }, 420);
+    card.classList.remove("selected");
+    selectedCard = null;
+    $("#gameMsg").className = "game-msg";
+    $("#gameMsg").innerHTML = "❌ Try again! <span class=\"why\">💡 Hint: "+esc(gameOrder[gRound].hint)+"</span>";
+  }
+}
+
+function checkRoundComplete(){
+  var slots = $$("#sentenceCard .slot");
+  var allFilled = slots.every(function(s){ return s.classList.contains("filled"); });
+  if(!allFilled) return;
+  state.game.points += 10;
+  state.game.round = gRound+1;
+  $("#gameScore").textContent = "⭐ Score: "+state.game.points;
+  var sentence = $("#sentenceCard").textContent.replace(/\s+/g," ").trim();
+  $("#gameMsg").className = "game-msg win";
+  $("#gameMsg").innerHTML = "<b>🎉 Excellent! +10 points</b><span class=\"why\">"+esc(sentence)+
+    "</span><span class=\"why\">Why: "+esc(gameOrder[gRound].why)+"</span>";
+  if(gRound < gameOrder.length-1){
+    $("#gameNext").hidden = false;
+    $("#gameNext").focus();
+  } else {
+    finishGame();
+  }
+}
+
+$("#gameNext").addEventListener("click", function(){ gRound++; loadRound(); });
+$("#gameHint").addEventListener("click", function(){
+  $("#gameMsg").className = "game-msg";
+  $("#gameMsg").innerHTML = "💡 Hint: "+esc(gameOrder[gRound].hint);
+});
+$("#gameReplay").addEventListener("click", function(){ startGame(); $("#sentenceCard").scrollIntoView({behavior:"smooth",block:"center"}); });
+
+function finishGame(){
+  state.game.done = true;
+  markDone("game", true);
+  var p = state.game.points;
+  $("#gameEnd").hidden = false;
+  $("#gameBig").textContent = p+" / 100";
+  $("#gamePct").textContent = p+"%";
+  $("#gameEndMsg").textContent = band(p);
+  $("#gameNext").hidden = true;
+  $("#gameEnd").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ================= LISTENING AUDIO ================= */
+
+var synth = window.speechSynthesis || null;
+var utter = null, rate = 1, speaking = false;
+
+$("#transcript").innerHTML = "<p>"+esc(LISTENING_TEXT)+"</p>";
+
+function setStatus(t){ $("#audioStatus").textContent = t; }
+
+function speak(fromStart){
+  if(!synth){ setStatus("Your browser does not support speech. Please use the transcript below."); return; }
+  if(fromStart){ synth.cancel(); }
+  if(!fromStart && synth.paused && speaking){ synth.resume(); setStatus("Playing…"); return; }
+  utter = new SpeechSynthesisUtterance(LISTENING_TEXT);
+  utter.rate = rate;
+  utter.pitch = 1;
+  utter.lang = "en-GB";
+  var voices = synth.getVoices ? synth.getVoices() : [];
+  var v = voices.filter(function(x){ return /en[-_]/i.test(x.lang); })[0];
+  if(v) utter.voice = v;
+  utter.onend = function(){ speaking=false; setStatus("Finished. Press replay to listen again."); };
+  utter.onerror = function(){ speaking=false; setStatus("The voice could not start. Please use the transcript below."); };
+  speaking = true;
+  synth.speak(utter);
+  setStatus("Playing at "+rate+"× speed…");
+}
+
+$("#btnPlay").addEventListener("click", function(){
+  if(synth && synth.paused && speaking){ speak(false); } else { speak(true); }
+});
+$("#btnPause").addEventListener("click", function(){
+  if(synth && synth.speaking && !synth.paused){ synth.pause(); setStatus("Paused. Press play to continue."); }
+});
+$("#btnReplay").addEventListener("click", function(){ speak(true); });
+$$(".speed button").forEach(function(b){
+  b.addEventListener("click", function(){
+    rate = parseFloat(b.dataset.rate);
+    $$(".speed button").forEach(function(x){ x.setAttribute("aria-pressed", String(x===b)); });
+    if(speaking) speak(true); else setStatus("Speed set to "+rate+"×. Press play.");
+  });
+});
+$("#btnTranscript").addEventListener("click", function(){
+  var t = $("#transcript"), open = t.hidden;
+  t.hidden = !open;
+  this.setAttribute("aria-expanded", String(open));
+  this.textContent = open ? "Hide transcript" : "Show transcript";
+});
+if(synth && synth.getVoices && synth.getVoices().length===0){
+  synth.onvoiceschanged = function(){};
+}
+window.addEventListener("beforeunload", function(){ if(synth) synth.cancel(); });
+
+/* ================= RESULTS ================= */
+
+function sectionScores(){
+  return [
+    {name:"Grammar practice", p:pct(state.practice.correct, state.practice.total), done:state.practice.done, detail:state.practice.correct+" / "+state.practice.total},
+    {name:"Reading mastery", p:pct(state.mastery.correct, state.mastery.total), done:state.mastery.done, detail:state.mastery.correct+" / "+state.mastery.total},
+    {name:"Grammar game", p:state.game.points, done:state.game.done, detail:state.game.points+" / 100"},
+    {name:"Listening", p:pct(state.listening.correct, state.listening.total), done:state.listening.done, detail:state.listening.correct+" / "+state.listening.total},
+    {name:"Homework", p:pct(state.homework.correct, state.homework.total), done:state.homework.submitted, detail:state.homework.correct+" / "+state.homework.total}
+  ];
+}
+
+function renderResults(){
+  var rows = sectionScores();
+  $("#resultBars").innerHTML = rows.map(function(r){
+    return '<div class="bar-row"><div class="top"><span>'+r.name+'</span><span>'+
+      (r.done ? r.detail+" · "+r.p+"%" : "Not finished yet")+
+      '</span></div><div class="track"><div class="fill'+(r.done?"":" empty")+'" data-w="'+(r.done?r.p:0)+'"></div></div></div>';
+  }).join("");
+  requestAnimationFrame(function(){
+    $$("#resultBars .fill").forEach(function(f){ f.style.width = f.dataset.w+"%"; });
+  });
+  var done = rows.filter(function(r){ return r.done; });
+  var overall = done.length ? Math.round(done.reduce(function(a,r){return a+r.p;},0)/done.length) : 0;
+  $("#overallVal").textContent = overall+"%";
+  var C = 2*Math.PI*80;
+  $("#ringFill").style.strokeDashoffset = String(C - C*overall/100);
+  $("#overallNote").textContent = done.length
+    ? band(overall)+" (based on "+done.length+" of 5 activities)"
+    : "Finish an activity to see your score.";
+}
+
+/* ================= RESET ================= */
+
+$$("[data-reset]").forEach(function(b){
+  b.addEventListener("click", function(){
+    var k = b.dataset.reset;
+    if(k==="homework"){
+      state.homework = {correct:0, total:HOMEWORK.length, submitted:false};
+      $("#hwResults").hidden = true;
+      $("#hwReview").innerHTML = "";
+      renderHomework();
+    } else {
+      state[k] = {correct:0, answered:0, total:state[k].total, done:false};
+      $("#"+k+"Score").hidden = true;
+      renderQuiz($("#"+k+"List"), k==="practice"?PRACTICE:(k==="mastery"?MASTERY:LISTENING), k);
+    }
+    markDone(k,false);
+  });
+});
+
+function restartLesson(){
+  if(!window.confirm("Restart the whole lesson? All scores will be cleared.")) return;
+  state = {
+    practice:{correct:0, answered:0, total:PRACTICE.length, done:false},
+    mastery:{correct:0, answered:0, total:MASTERY.length, done:false},
+    game:{points:0, round:0, done:false},
+    listening:{correct:0, answered:0, total:LISTENING.length, done:false},
+    homework:{correct:0, total:HOMEWORK.length, submitted:false}
+  };
+  ["practice","mastery","listening"].forEach(function(k){ $("#"+k+"Score").hidden = true; });
+  $("#hwResults").hidden = true; $("#hwReview").innerHTML = "";
+  TABS.forEach(function(t){ markDone(t,false); });
+  if(synth) synth.cancel();
+  speaking = false;
+  setStatus("Ready. The audio is read aloud by your browser's voice.");
+  $("#transcript").hidden = true;
+  $("#btnTranscript").textContent = "Show transcript";
+  $("#btnTranscript").setAttribute("aria-expanded","false");
+  buildAll();
+  showTab("welcome");
+}
+$("#btnRestart").addEventListener("click", restartLesson);
+$("#btnRestart2").addEventListener("click", restartLesson);
+
+/* ================= INIT ================= */
+
+function buildAll(){
+  renderQuiz($("#practiceList"), PRACTICE, "practice");
+  renderQuiz($("#masteryList"), MASTERY, "mastery");
+  renderQuiz($("#listeningList"), LISTENING, "listening");
+  renderHomework();
+  startGame();
+  renderResults();
+}
+buildAll();
+showTab("welcome", true);
+
+})();
+</script>
+
+</body>
+</html>
